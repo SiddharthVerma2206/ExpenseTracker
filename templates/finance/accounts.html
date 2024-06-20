@@ -1,0 +1,88 @@
+{% extends "homePage.html" %}
+{% load static %}
+
+{% block title %}Account{% endblock title %}
+
+
+{% block style %}
+    <link href="{% static "css/expopop.css" %}" rel="stylesheet">
+    <link href="{% static "css/incopop.css" %}" rel="stylesheet">
+{% endblock style %}
+
+
+{% block head %}
+<nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white text-2xl font-bold">Accounts:</div>
+        <div class="flex justify-center space-x-8" >
+            <a href="#" onclick="popupFn()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Account</a>
+        </div>
+    </div>
+</nav>
+{% endblock head %}
+
+
+
+{% block content %}
+<div class="bg-white shadow-md rounded-lg p-5 mb-5">
+    <h2 class="text-2xl font-semibold mb-4">Cash:</h2>
+    {% for money in cash %}
+    <div class="bg-gray-200 shadow-md rounded-lg p-6 mb-5">
+    <h2 class="text-2xl font-semibold mb-4">{{money.name}}</h2>
+    <div class="flex items-center justify-between mb-2">
+        <div class="flex-1">
+            <h4 class="text-xl font-semibold">Amount: {{money.amount}}</h4>
+        </div>
+        <div class="text-right">
+            <a href="{% url 'delete-baseMoney' money.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="bg-white shadow-md rounded-lg p-6 mb-5">
+    <h2 class="text-2xl font-semibold mb-4">Bank Accounts:</h2>
+    {% for account in bankAcc %}
+    <div class="bg-gray-200 shadow-md rounded-lg p-6 mb-5">
+    <h2 class="text-2xl font-semibold mb-4">{{account.name}}</h2>
+    <div class="flex items-center justify-between mb-2">
+        <div class="flex-1">
+            <h4 class="text-xl font-semibold">Amount: {{account.amount}}</h4>
+        </div>
+        <div class="text-right">
+            <a href="{% url 'delete-baseMoney' account.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="bg-white shadow-md rounded-lg p-6 mb-5">
+    <h2 class="text-2xl font-semibold mb-4">Credit cards:</h2>
+    {% for credit in creditcard %}
+    <div class="bg-gray-200 shadow-md rounded-lg p-6 mb-5">
+    <h2 class="text-2xl font-semibold mb-4">{{credit.name}}</h2>
+    <div class="flex items-center justify-between mb-2">
+        <div class="flex-1">
+            <h4 class="text-xl font-semibold">Limit: {{credit.limit}}</h4>
+            <h4 class="text-xl font-semibold">Spent: {{credit.spent}}</h4>
+        </div>
+        <div class="text-right">
+            <a href="{% url 'reset-spent' credit.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Reset</a>
+            <a href="{% url 'delete-baseMoney' credit.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}
+
+{% block popup %}
+
+<div id="popupDialog" class="relative p-4 w-full max-w-md max-h-full bg-gray-100">
+    {% include "finance/addaccount.html" %}
+</div>
+
+<script src="{% static 'js/expopop.js' %}"></script>
+{% endblock popup %}

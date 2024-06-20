@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{% static "css/expopop.css" %}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-black text-2xl font-bold">Your Logo</div>
+            <div>
+                <a href="#" onclick="popupFn()" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Login</a>
+                <a href="{% url "signup" %}" class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded ml-2">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-96 flex items-center justify-center text-black">
+        <div class="text-center">
+            <h1 class="text-5xl font-bold mb-4">Welcome to Our Service</h1>
+            <p class="text-xl mb-8">The best solution for managing your finances.</p>
+            <a href="#features" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-8">Features</h2>
+            <div class="flex flex-wrap -mx-4">
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4">Feature 1</h3>
+                        <p class="text-gray-600">Description of feature 1.</p>
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4">Feature 2</h3>
+                        <p class="text-gray-600">Description of feature 2.</p>
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4">Feature 3</h3>
+                        <p class="text-gray-600">Description of feature 3.</p>
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4">Feature 4</h3>
+                        <p class="text-gray-600">Description of feature 4.</p>
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4">Feature 5</h3>
+                        <p class="text-gray-600">Description of feature 5.</p>
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4">Feature 6</h3>
+                        <p class="text-gray-600">Description of feature 6.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div id="overlay"></div>
+
+    <div id="popupDialog" class="relative p-4 w-full max-w-md max-h-full bg-gray-100 ">
+        {% include "login.html" %}
+    </div>
+    
+    <script src="{% static 'js/expopop.js' %}"></script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 p-4 text-white text-center">
+        <p>&copy; 2024 Your Company. All rights reserved. </p>
+    </footer>
+
+</body>
+</html>

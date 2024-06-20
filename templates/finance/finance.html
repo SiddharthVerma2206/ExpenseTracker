@@ -1,0 +1,94 @@
+{% extends "homePage.html" %}
+{% load static %}
+
+{% block title %}Finance{% endblock title %}
+
+{% block style %}
+<link href="{% static "css/expopop.css" %}" rel="stylesheet">
+<link href="{% static "css/incopop.css" %}" rel="stylesheet">
+{% endblock style %}
+
+{% block head %}
+<nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white text-2xl font-bold">FinancePage</div>
+        <div class="flex justify-center space-x-4">
+            <a href="#" onclick="incomepopup()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Income</a>
+            <a href="#" onclick="popupFn()" class=" bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Expense</a>
+        </div>
+    </div>
+</nav>
+{% endblock head %}
+
+{% block content %}
+
+<div class="bg-white shadow-md rounded-lg p-6 mb-5">
+    <h2 class="text-2xl font-semibold mb-4">Incomes</h2>
+    <table class="display alltable responsive nowrap">
+        <thead>
+            <tr class="bg-gray-800 text-white" align="left">
+                <th>Date</th>
+                <th>Reason</th>
+                <th>Amount</th> 
+                <th>Credited To</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inco in income_page_obj %}
+            <tr class="border-b">
+                <td>{{ inco.date|date:"d M, Y" }}</td>
+                <td>{{ inco.name }}</td>
+                <td>{{ inco.amount }}</td>
+                <td>{{ inco.creditedIn }}</td>
+                <td>
+                    <a  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<div class="bg-white shadow-md rounded-lg p-6 mb-5">
+    <h2 class="text-2xl font-semibold mb-4">Expenses</h2>
+    <table class="display alltable responsive nowrap">
+        <thead>
+            <tr class="bg-gray-800 text-white" align="left">
+                <th>Date</th>
+                <th>Reason</th>
+                <th>Amount</th>
+                <th>Debited From</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expo in expense_page_obj %}
+            <tr class="border-b">
+                <td>{{ expo.date|date:"d M, Y" }}</td>
+                <td>{{ expo.name }}</td>
+                <td>{{ expo.amount }}</td>
+                <td>{{ expo.debitedFrom }}</td>
+                <td>
+                    <a href="{% url 'delete-expense' expo.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
+
+{% block popup %}
+<div id="popupDialog" class="relative p-4 w-full max-w-md max-h-full bg-gray-100 ">
+    {% include "finance/addExpense.html" %}
+</div>
+
+<div id="popupDialogforincome" class="relative p-4 w-full max-w-md max-h-full bg-gray-100 ">
+    {% include "finance/addincome.html" %}
+</div>
+
+<script src="{% static 'js/expopop.js' %}"></script>
+<script src="{% static 'js/incopop.js' %}"></script>
+{% endblock popup %}
