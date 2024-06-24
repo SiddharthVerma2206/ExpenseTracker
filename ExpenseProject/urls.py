@@ -21,8 +21,8 @@ from  django.conf.urls.static import static #new
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('User/' , include('AuthApp.urls')),
-    path("" , include('BaseApp.urls')),
+    path('projects/ExpenseTracker/User/' , include('AuthApp.urls')),
+    path("projects/ExpenseTracker/" , include('BaseApp.urls')),
 ]
 
 if settings.DEBUG:
