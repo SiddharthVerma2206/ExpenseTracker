@@ -1,6 +1,7 @@
 *.pyc
 __pycache__/
 __pycache__
+db.sqlite3
 
 AuthApp/__pycache__/__init__.cpython-312.pyc
 AuthApp/__pycache__/admin.cpython-312.pyc
