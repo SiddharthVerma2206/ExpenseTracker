@@ -28,7 +28,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-
+STATIC_HOST = "https://d4663kmspf1sqa.cloudfront.net" if not DEBUG else ""
+STATIC_URL = STATIC_HOST + "/static/"
 
 # Application definition
 
