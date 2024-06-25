@@ -10,7 +10,11 @@
     <link href="{% static "css/signup.css" %}" rel="stylesheet">
 </head>
 <body class="bg-gray-100 text-gray-800">
-
+    {% for message in messages %}
+    <div id="toast-bottom-right" class="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-white bg-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow bottom-5 right-5 dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800">
+        <div class="text-sm font-normal">{{message}}</div>
+    </div>
+        {% endfor %}
     <!-- Navbar -->
     <nav class="bg-gray-800 p-4">
         <div class="container mx-auto flex justify-between items-center">
@@ -71,6 +75,7 @@
     
     <script src="{% static 'js/login.js' %}"></script>
     <script src="{% static 'js/signup.js' %}"></script>
+    <script src="{% static 'js/homePage.js' %}"></script>
 
     <!-- Footer -->
     <footer class="bg-gray-800 p-4 text-white text-center">
