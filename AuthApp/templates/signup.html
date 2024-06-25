@@ -7,7 +7,7 @@
     </button>
 </div>
 <div class="dark:border-gray-600">
-<form method="POST" action="{% url "SignUp" %}" class="max-w-l mx-auto">
+<form method="POST" action="{% url "signup" %}" class="max-w-l mx-auto">
   {% csrf_token %}
     <div class="mb-5">
       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
