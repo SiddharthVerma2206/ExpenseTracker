@@ -122,7 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/home/ubuntu/portfolio/projects/ExpenseTracker/templates/'
-STATICFILES_DIRS=[os.path.join(BASE_DIR,'/home/ubuntu/portfolio/projects/ExpenseTracker/templates/')]
+# STATICFILES_DIRS=[os.path.join(BASE_DIR,'/home/ubuntu/portfolio/projects/ExpenseTracker/templates/')]
 STATIC_ROOT=os.path.join(BASE_DIR,'/home/ubuntu/portfolio/projects/ExpenseTracker/templates/') 
 
 
@@ -132,3 +132,4 @@ STATIC_ROOT=os.path.join(BASE_DIR,'/home/ubuntu/portfolio/projects/ExpenseTracke
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# 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
