@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="{% static "css/expopop.css" %}" rel="stylesheet">
+    <link href="{% static "css/login.css" %}" rel="stylesheet">
+    <link href="{% static "css/signup.css" %}" rel="stylesheet">
 </head>
 <body class="bg-gray-100 text-gray-800">
 
@@ -15,8 +16,8 @@
         <div class="container mx-auto flex justify-between items-center">
             <div class="text-black text-2xl font-bold">Your Logo</div>
             <div>
-                <a href="#" onclick="popupFn()" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Login</a>
-                <a href="{% url "signup" %}" class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded ml-2">Sign Up</a>
+                <a href="#" onclick="loginpop()" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Login</a>
+                <a href="#" onclick="signupop()" class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded ml-2">Sign Up</a>
             </div>
         </div>
     </nav>
@@ -53,24 +54,6 @@
                         <p class="text-gray-600">Description of feature 3.</p>
                     </div>
                 </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-                    <div class="bg-white shadow-lg rounded-lg p-6">
-                        <h3 class="text-2xl font-bold mb-4">Feature 4</h3>
-                        <p class="text-gray-600">Description of feature 4.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-                    <div class="bg-white shadow-lg rounded-lg p-6">
-                        <h3 class="text-2xl font-bold mb-4">Feature 5</h3>
-                        <p class="text-gray-600">Description of feature 5.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-                    <div class="bg-white shadow-lg rounded-lg p-6">
-                        <h3 class="text-2xl font-bold mb-4">Feature 6</h3>
-                        <p class="text-gray-600">Description of feature 6.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -78,11 +61,16 @@
 
     <div id="overlay"></div>
 
-    <div id="popupDialog" class="relative p-4 w-full max-w-md max-h-full bg-gray-100 ">
+    <div id="loginpop" class="relative p-4 w-full max-w-md max-h-full bg-gray-100 ">
         {% include "login.html" %}
     </div>
     
-    <script src="{% static 'js/expopop.js' %}"></script>
+    <div id="signupop" class="relative p-4 w-full max-w-md max-h-full bg-gray-100 ">
+        {% include "signup.html" %}
+    </div>
+    
+    <script src="{% static 'js/login.js' %}"></script>
+    <script src="{% static 'js/signup.js' %}"></script>
 
     <!-- Footer -->
     <footer class="bg-gray-800 p-4 text-white text-center">
