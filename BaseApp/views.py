@@ -84,22 +84,15 @@ def addbaseMoney(request):
         typeofacc = request.POST.get('typeofacc')
         amount = request.POST.get('amount')
         limit = request.POST.get('limit')
-        if typeofacc!=baseMoney.Credit_Card and amount<=0:
-            messages.error(request , "Amount Cannot Be Blank Or Empty.")
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        elif typeofacc == baseMoney.Credit_Card and limit <= 0:
-            messages.error(request , "Limit Cannot Be Blank Or Empty.")
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        else:
-            baseMoney.objects.create(
-                user=request.user,
-                name=name,
-                typeofacc=typeofacc,
-                amount=amount if typeofacc != baseMoney.Credit_Card else None,
-                limit=limit if typeofacc == baseMoney.Credit_Card else None
-            )
-            messages.success(request , "Financtial Account Succesfully Created.")
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        baseMoney.objects.create(
+            user=request.user,
+            name=name,
+            typeofacc=typeofacc,
+            amount=amount if typeofacc != baseMoney.Credit_Card else None,
+            limit=limit if typeofacc == baseMoney.Credit_Card else None
+        )
+        messages.success(request , "Financtial Account Succesfully Created.")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         
 def addincomesource(request):
     if request.method=='POST':
