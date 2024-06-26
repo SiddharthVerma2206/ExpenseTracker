@@ -26,7 +26,7 @@
 
 {% block message %}
 {% for message in messages %}
-<div id="toast-bottom-right" class="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-white bg-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow bottom-5 right-5 dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800">
+<div id="toast-bottom-right" class="fixed z-101 flex items-center w-full max-w-xs p-4 space-x-4 text-white bg-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow bottom-5 right-5 dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800">
     <div class="text-sm font-normal">{{message}}</div>
 </div>
     {% endfor %}
@@ -128,6 +128,7 @@
                             <td>{{ entry.name }}</td>
                             <td>{{ entry.amount }}</td>
                             <td>{{ entry.entry_type }}</td>
+                            <td>{{ entry.entry_type }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -218,7 +219,7 @@
             "info": false,
             "autoWidth": false,
             scrollCollapse: true,
-            scrollY: '800px'
+            scrollY: '400px'
         });
     });
 </script>
