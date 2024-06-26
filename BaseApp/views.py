@@ -79,32 +79,41 @@ def showaccounts(request):
         return redirect('homePage')
 
 def addbaseMoney(request):
-    if request.method == 'GET':
-        return render(request, 'finance/addbasemoney.html')
     if request.method == 'POST':
         name = request.POST.get('name')
         typeofacc = request.POST.get('typeofacc')
         amount = request.POST.get('amount')
         limit = request.POST.get('limit')
-        baseMoney.objects.create(
-            user=request.user,
-            name=name,
-            typeofacc=typeofacc,
-            amount=amount if typeofacc != baseMoney.Credit_Card else None,
-            limit=limit if typeofacc == baseMoney.Credit_Card else None
-        )
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        if typeofacc!=baseMoney.Credit_Card and amount<=0:
+            messages.error(request , "Amount Cannot Be Blank Or Empty.")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        elif typeofacc == baseMoney.Credit_Card and limit <= 0:
+            messages.error(request , "Limit Cannot Be Blank Or Empty.")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            baseMoney.objects.create(
+                user=request.user,
+                name=name,
+                typeofacc=typeofacc,
+                amount=amount if typeofacc != baseMoney.Credit_Card else None,
+                limit=limit if typeofacc == baseMoney.Credit_Card else None
+            )
+            messages.success(request , "Financtial Account Succesfully Created.")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         
 def addincomesource(request):
     if request.method=='POST':
         name = request.POST.get('name')
         credited_to_id = request.POST.get('creditedTo')
         creditedto = baseMoney.objects.get(id=credited_to_id)
-        amount =int(request.POST.get('amount'))
+        amount =float(request.POST.get('amount'))
         date = request.POST.get('date')
 
         if creditedto.typeofacc == 'Credit Card':
             messages.error(request , "Cannot Add Income To a CreditCard")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        elif amount == 0:
+            messages.error(request , "Amount Cannot Be Empty.")
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             creditedto.amount += amount
@@ -116,6 +125,7 @@ def addincomesource(request):
                 amount=amount,
                 date=date,
             )
+            messages.success(request , "Income Added.")
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def addexpensesource(request):
@@ -123,31 +133,47 @@ def addexpensesource(request):
         name = request.POST.get('name')
         debitedfrom_id = request.POST.get('debitedFrom')
         debitedfrom = baseMoney.objects.get(id=debitedfrom_id)
-        amount =int(request.POST.get('amount'))
+        amount =float(request.POST.get('amount'))
         date = request.POST.get('date')
 
-        if debitedfrom.typeofacc == 'Credit Card':
+        if amount==0:
+            messages.success(request , "Amount Cannot Be Empty.")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+        elif debitedfrom.typeofacc == 'Credit Card':
             if debitedfrom.limit < amount :
                 messages.error(request , "Cannot Spend More Than Limit")
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             else:
                 debitedfrom.limit -= amount
                 debitedfrom.spent += amount
+                debitedfrom.save()
+                expenseSource.objects.create(
+                    user=request.user,
+                    name=name,
+                    debitedFrom=debitedfrom,
+                    amount=amount,
+                    date=date,
+                )
+                messages.success(request , "Expense Added.")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             if debitedfrom.amount < amount:
                 messages.error(request , "Cannot Spend More Money Than Available")
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             else:
                 debitedfrom.amount -= amount
-        debitedfrom.save()
-        expenseSource.objects.create(
-            user=request.user,
-            name=name,
-            debitedFrom=debitedfrom,
-            amount=amount,
-            date=date,
-        )
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                debitedfrom.save()
+                expenseSource.objects.create(
+                    user=request.user,
+                    name=name,
+                    debitedFrom=debitedfrom,
+                    amount=amount,
+                    date=date,
+                )
+                messages.success(request , "Expense Added.")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
 
 def resetspent(request , baseMoney_id):
     base = baseMoney.objects.get(pk=baseMoney_id)

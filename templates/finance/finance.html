@@ -42,7 +42,7 @@
                 <td>{{ inco.amount }}</td>
                 <td>{{ inco.creditedIn }}</td>
                 <td>
-                    <a  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+                    <a href="{% url 'delete-income' inco.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
                 </td>
             </tr>
             {% endfor %}
