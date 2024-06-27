@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('projects/ExpenseTracker/User/' , include('AuthApp.urls')),
     path("projects/ExpenseTracker/" , include('BaseApp.urls')),
+    path("convert/", include("guest_user.urls")),
 ]
 
 if settings.DEBUG:

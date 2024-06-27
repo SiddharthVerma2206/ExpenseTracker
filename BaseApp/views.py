@@ -6,9 +6,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Value, CharField , Sum
 from django.db.models.functions import Concat
-
+from guest_user.decorators import allow_guest_user #type: ignore
 
 # Create your views here.
+def Landing(request):
+        if request.user.is_authenticated:
+            return redirect('homePage')
+        return render(request , 'Landing.html')
+        
+@allow_guest_user
 def homePage(request):
     if request.user.is_authenticated:
         user = request.user
@@ -47,7 +53,7 @@ def homePage(request):
         }
         return render(request, 'homePage.html', context)
     else:
-        return render(request, "Landing.html")
+        return redirect('Landing')
 
 def financeview(request):
     if request.user.is_authenticated:
@@ -67,7 +73,7 @@ def financeview(request):
             'today_date': today_date
         })
     else:
-        return redirect('homePage')
+        return redirect('Landing')
     
 def showaccounts(request):
     if request.user.is_authenticated:
@@ -76,7 +82,7 @@ def showaccounts(request):
         creditcard = baseMoney.objects.filter(user=request.user , typeofacc = baseMoney.Credit_Card)
         return render(request , 'finance/accounts.html' , {'cash':cash , 'bankAcc':bankacc , 'creditcard':creditcard})
     else:
-        return redirect('homePage')
+        return redirect('Landing')
 
 def addbaseMoney(request):
     if request.method == 'POST':

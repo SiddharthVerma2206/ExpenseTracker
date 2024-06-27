@@ -1,28 +1,28 @@
 {% load static %}
 <link href="{% static 'css/nav.css' %}" rel="stylesheet" />
-<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
 <div class="sidebar">
       <div class="logo-details">
           <a href="{% url "homePage" %}">
-          <i class='bx bx-home' id="btn"></i>
+          <i class='fa-solid fa-house' id="btn"></i>
         </a>
         </div>
         <ul class="nav-list">
           <li>
             <a href="{% url "financeurl" %}">
-              <i class='bx bx-money'></i>
+              <i class="fa-solid fa-money-bill-wave"></i>
             </a>
             <span class="tooltip">Finance</span>
           </li>
           <li>
             <a href="{% url "showaccounts" %}">
-              <i class='bx bx-wallet-alt'></i>
+              <i class='fa-solid fa-landmark'></i>
             </a>
             <span class="tooltip">Your Accounts</span>
           </li>
           <li>
             <a href="#">
-              <i class='bx bx-pie-chart-alt-2'></i>
+              <i class='fa-solid fa-chart-pie'></i>
             </a>
             <span class="tooltip">Analytics</span>
           </li>
@@ -30,22 +30,15 @@
           {% if user.is_authenticated %}
           <li>
             <a href="{% url "logout" %}">
-              <i class='bx bx-log-out'></i>
+              <i class='fa-solid fa-right-from-bracket'></i>
             </a>
             <span class="tooltip">logout</span>
           </li>
-          {% else %}
           <li>
-            <a href="{% url "signup" %}">
-              <i class='bx bx-user-plus'></i>
+            <a href="{% url 'delete' %}">
+              <i class='fa-solid fa-trash'></i>
             </a>
-            <span class="tooltip">signup</span>
-          </li>
-          <li>
-            <a href="{% url "login" %}">
-              <i class='bx bx-log-in'></i>
-            </a>
-            <span class="tooltip">login</span>
+            <span class="tooltip">Delete Account</span>
           </li>
           {% endif %}
         </ul>

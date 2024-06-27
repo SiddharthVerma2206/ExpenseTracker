@@ -35,6 +35,7 @@ STATIC_URL = STATIC_HOST + "/static/"
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
+    "guest_user",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,6 +131,10 @@ STATIC_URL = 'static/'
 # STATICFILES_DIRS=[os.path.join(BASE_DIR,'templates/static')]
 STATIC_ROOT=os.path.join(BASE_DIR,'templates/static')
 
+AUTHENTICATION_BACKENDS = [
+   "django.contrib.auth.backends.ModelBackend",
+   "guest_user.backends.GuestBackend",
+]
 
 
 # Default primary key field type

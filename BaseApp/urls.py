@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("" , views.homePage , name="homePage"),
+    path("" , views.Landing , name="Landing"),
+    path("HomePage" , views.homePage , name="homePage"),
     path("finance" , views.financeview , name="financeurl"),
     path("baseMoney" , views.addbaseMoney , name="baseMoney"),
     path("income" , views.addincomesource , name="incomeSource"),
