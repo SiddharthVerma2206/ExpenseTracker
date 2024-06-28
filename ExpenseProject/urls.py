@@ -20,7 +20,7 @@ from django.conf import settings # new
 from  django.conf.urls.static import static #new
 
 urlpatterns = [
-    path('projects/ExpenseTracker/admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('projects/ExpenseTracker/User/' , include('AuthApp.urls')),
     path("projects/ExpenseTracker/" , include('BaseApp.urls')),
     path("convert/", include("guest_user.urls")),
