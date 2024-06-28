@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'ExpenseProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'newdb',
+        'NAME': 'prodb',
         'USER': 'siddharth',
         'PASSWORD': '12341234',
         'HOST': 'localhost',
