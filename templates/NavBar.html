@@ -1,4 +1,5 @@
 {% load static %}
+{% load guest_user %}
 <link href="{% static 'css/nav.css' %}" rel="stylesheet" />
 
 <div class="sidebar">
@@ -28,6 +29,14 @@
           </li>
           <hr>
           {% if user.is_authenticated %}
+          {% if user|is_guest %}
+          <li>
+            <a href="{% url 'delete' %}">
+              <i class='fa-solid fa-trash'></i>
+            </a>
+            <span class="tooltip">Delete Guest Account & Exit</span>
+          </li>
+          {% else %}
           <li>
             <a href="{% url "logout" %}">
               <i class='fa-solid fa-right-from-bracket'></i>
@@ -40,6 +49,7 @@
             </a>
             <span class="tooltip">Delete Account</span>
           </li>
+          {% endif %}
           {% endif %}
         </ul>
 </div>

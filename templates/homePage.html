@@ -1,4 +1,5 @@
   {% load static %}
+  {% load guest_user %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
 <nav class="bg-gray-800 p-4">
     <div class=" flex justify-between flex-grow container items-center lg:mx-auto md:mx-auto sm:pl-20">
         <div class="text-white text-2xl font-bold">HomePage</div>
-        <div class="text-white text-xl font-bold">{{ user }}</div>
+        <div class="text-white text-xl font-bold">{% if user|is_guest_user %}Guest User(Delete Account To Sign Out){% else %}{{user}}{% endif %}</div>
         <div class="flex justify-center space-x-4">
             <a href="#" onclick="incomepopup()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Income</a>
             <a href="#" onclick="popupFn()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Expense</a>
@@ -113,7 +114,7 @@
     
         <div class="w-full md:w-1/2 mt-8 md:mt-0">
             <div class="mt-8">
-                <h2 class="text-2xl font-semibold text-right">Your Entries</h2>
+                <h2 class="text-2xl font-semibold text-right">Your Entries From {{ start_date }} To {{ end_date }}</h2>
                 <table  style="width:100%" class="display summarytable responsive nowrap">
                     <thead>
                         <tr class="bg-gray-800 text-white">
@@ -218,7 +219,7 @@
             "info": false,
             "autoWidth": false,
             scrollCollapse: true,
-            scrollY: '400px'
+            scrollY: '300px'
         });
     });
 </script>
