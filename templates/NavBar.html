@@ -9,13 +9,13 @@
         </a>
         </div>
         <ul class="nav-list">
-          <li>
+          <li id="finance">
             <a href="{% url "financeurl" %}">
               <i class="fa-solid fa-money-bill-wave"></i>
             </a>
-            <span class="tooltip">Finance</span>
+            <span class="tooltip">Transactions</span>
           </li>
-          <li>
+          <li id="accounts">
             <a href="{% url "showaccounts" %}">
               <i class='fa-solid fa-landmark'></i>
             </a>
@@ -30,7 +30,7 @@
           <hr>
           {% if user.is_authenticated %}
           {% if user|is_guest_user %}
-          <li>
+          <li id="delete">
             <a href="{% url 'delete' %}">
               <i class='fa-solid fa-trash'></i>
             </a>

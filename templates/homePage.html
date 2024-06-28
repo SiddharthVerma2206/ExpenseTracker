@@ -11,6 +11,7 @@
     {% block style %}
     <link href="{% static "css/expopop.css" %}" rel="stylesheet">
     <link href="{% static "css/incopop.css" %}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css" rel="stylesheet">
     {% endblock style %}
 
     {% block datatablestyle %}
@@ -60,7 +61,7 @@
 <div class="flex-grow container lg:mx-auto md:mx-auto sm:pl-24 sm:pt-4">
 {% block content %}
     <div class="bg-white shadow-md rounded-lg p-6 mb-5">
-        <h2 class="text-2xl font-semibold mb-4">All Entries</h2>
+        <h2 class="text-2xl font-semibold mb-4">All Transactions</h2>
         <table  style="width:100%" class="display alltable responsive nowrap">
             <thead>
                 <tr class="bg-gray-800 text-white">
@@ -114,7 +115,7 @@
     
         <div class="w-full md:w-1/2 mt-8 md:mt-0">
             <div class="mt-8">
-                <h2 class="text-2xl font-semibold text-right">Your Entries From {{ start_date }} To {{ end_date }}</h2>
+                <h2 class="text-2xl font-semibold text-right">Your Transactions From {{ start_date }} To {{ end_date }}</h2>
                 <table  style="width:100%" class="display summarytable responsive nowrap">
                     <thead>
                         <tr class="bg-gray-800 text-white">
@@ -138,6 +139,24 @@
     </div>
 </div>
 
+<script src="https://unpkg.com/intro.js/intro.js" crossorigin="anonymous"></script>
+{% if user|is_guest_user %}
+<script>
+    introJs().setOption("dontShowAgain", true).setOptions({
+        steps:[
+        {element: document.getElementById('accounts'),
+        title:'Accounts',
+        intro:'First Add Your Financial Accounts'},
+        {element:document.getElementById('finance'),
+        title:'Transactions',
+        intro:'Then Add Your Transactions From Here'},
+        {element:document.getElementById('delete'),
+        title:'Exit',
+        intro:'When Done Please Delete The Account To Exit'}
+        ]
+    }).start();
+</script>
+{% endif %}
 {% endblock content %}
 </div>
 
