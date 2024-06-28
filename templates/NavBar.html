@@ -29,7 +29,7 @@
           </li>
           <hr>
           {% if user.is_authenticated %}
-          {% if user|is_guest %}
+          {% if user|is_guest_user %}
           <li>
             <a href="{% url 'delete' %}">
               <i class='fa-solid fa-trash'></i>
