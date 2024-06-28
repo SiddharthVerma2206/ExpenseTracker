@@ -11,3 +11,12 @@ function closesignupop() {
 document.getElementById("overlay").addEventListener("click", function() {
     closesignupop();
 });
+
+function passtoggleforsu() {
+    var x = document.getElementById("passwordforsu");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }

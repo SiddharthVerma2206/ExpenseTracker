@@ -11,3 +11,12 @@ function closeloginpop() {
 document.getElementById("overlay").addEventListener("click", function() {
     closeloginpop();
 });
+
+function passtoggle() {
+    var y = document.getElementById("password");
+    if (y.type === "password") {
+      y.type = "text";
+    } else {
+      y.type = "password";
+    }
+  }

@@ -2,20 +2,28 @@ from django.shortcuts import render , redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login , authenticate , logout
 from django.contrib import messages
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
 # Create your views here.
 def signup(request):
         username=request.POST['username']
         password=request.POST['password']
         email=request.POST['email']
-        if User.objects.filter(username=username).exists():     
-            messages.error(request , "User Already Exists. Try Logging In")
+        try:
+            validate_email(email)
+        except ValidationError :
+            messages.error(request, "The Email Entered Was Not Valid.")
             return redirect('Landing')
         else:
-            user= User.objects.create_user(username=username ,email=email  , password=password)
-            user.save()
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('homePage')
+            if User.objects.filter(username=username).exists():     
+                messages.error(request , "User Already Exists. Try Logging In")
+                return redirect('Landing')
+            else:
+                user= User.objects.create_user(username=username ,email=email  , password=password)
+                user.save()
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect('homePage')
             
         
 def login_user(request):
