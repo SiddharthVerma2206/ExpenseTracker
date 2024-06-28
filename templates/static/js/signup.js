@@ -7,3 +7,7 @@ function closesignupop() {
     document.getElementById("overlay").style.display = "none";
     document.getElementById("signupop").style.display = "none";
 }
+
+document.getElementById("overlay").addEventListener("click", function() {
+    closesignupop();
+});

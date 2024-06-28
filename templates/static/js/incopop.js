@@ -7,3 +7,7 @@ function closeincomepopup() {
     document.getElementById("overlay").style.display = "none";
     document.getElementById("popupDialogforincome").style.display = "none";
 }
+
+document.getElementById("overlay").addEventListener("click", function() {
+    closeincomepopup();
+});

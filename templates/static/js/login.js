@@ -7,3 +7,7 @@ function closeloginpop() {
     document.getElementById("overlay").style.display = "none";
     document.getElementById("loginpop").style.display = "none";
 }
+
+document.getElementById("overlay").addEventListener("click", function() {
+    closeloginpop();
+});

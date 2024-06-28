@@ -24,4 +24,6 @@ function closeFn() {
     document.getElementById("popupDialog").style.display = "none";
 }
 
-
+document.getElementById("overlay").addEventListener("click", function() {
+    closeFn();
+});
